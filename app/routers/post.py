@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from sqlalchemy import func
 # from sqlalchemy.sql.functions import func
-from .. import models, schemas, auth2 as oauth2
+from .. import models, oauth2, schemas
 from ..database import get_db
 
 

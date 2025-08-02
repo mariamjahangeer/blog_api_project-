@@ -30,3 +30,7 @@ app.include_router(vote.router)
 @app.get("/")
 def root():
     return {"message": "Hello World pushing out to ubuntu"}
+from . import models
+from .database import engine
+models.Base.metadata.drop_all(bind=engine)  # deletes all existing tables
+models.Base.metadata.create_all(bind=engine)  # recreates all models

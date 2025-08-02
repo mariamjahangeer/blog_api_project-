@@ -16,10 +16,12 @@ router = APIRouter(
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
     # hash the password - user.password
-    hashed_password = utils.hash(user.password)
+    hashed_password = utilis.hash(user.password)
     user.password = hashed_password
 
-    new_user = models.User(**user.dict())
+    user_data = user.model_dump()
+    user_data['password'] = hashed_password
+    new_user=models.User(**user.model_dump())
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
