@@ -34,3 +34,7 @@ from . import models
 from .database import engine
 models.Base.metadata.drop_all(bind=engine)  # deletes all existing tables
 models.Base.metadata.create_all(bind=engine)  # recreates all models
+
+
+from .routers import comment
+app.include_router(comment.router)
