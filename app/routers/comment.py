@@ -1,13 +1,13 @@
-from fastapi import APIROUTER,Depends,status,HTTPException
+from fastapi import APIRouter,Depends,status,HTTPException
 from sqlalchemy.orm import Session
 from .. import models,schemas,database
-router= APIROUTER(
+router= APIRouter(
     prefix="/comments",
     tags=["comments"]
 )
 # create a comment
-@router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.Commentout)
-def create_comment(comment:schemas.Commentcreate,db:Session=Depends(database.get_db)):
+@router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.CommentOut)
+def create_comment(comment:schemas.CommentBase,db:Session=Depends(database.get_db)):
     new_comment= models.comment(**comment.dict())
     db.add(new_comment)
     db.commit()
