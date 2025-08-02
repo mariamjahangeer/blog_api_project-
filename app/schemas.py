@@ -65,3 +65,16 @@ class Vote(BaseModel):
     post_id: int
     dir: conint(le=1)
     
+class Commentbase(BaseModel):
+    content:str
+
+    class Commentcreate(Commentbase):
+        pass
+    class Commentout(Commentbase):
+        id:int
+        user_id:int
+        post_id:int
+        created_at:datetime
+        
+        class Config:
+        orm_mode = True

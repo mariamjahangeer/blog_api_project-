@@ -37,3 +37,12 @@ class Vote(Base):
     post_id = Column(Integer, ForeignKey(
         "posts.id", ondelete="CASCADE"), primary_key=True)
     
+class Comment(Base):
+    __tablename__="comments"
+    id=Column(Integer,index=True,primary_key=True)
+    content=Column(String,nullable=False)
+    post_id=Column(Integer, ForeignKey("post.id",ondelete="CASCADE"),nullable=False)
+    user_id=Column(Integer, ForeignKey("user.id",ondelete="CASCADE"),nullable=False)
+    created_at=Column(TIMESTAMP(timezone=True))
+    user=relationship("user")
+    post=relationship("post")
